@@ -5,15 +5,20 @@ import datetime
 import imutils
 import time
 import cv2
+import frames
 
 # construct the argument parser and parse the arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-a", "--min-area", type=int, default=800, help="minimum area size")
-args = vars(ap.parse_args())
-
+# ap = argparse.ArgumentParser()
+# ap.add_argument("-a", "--min-area", type=int, default=800, help="minimum area size")
+# args = vars(ap.parse_args())
+minarea = 1000
 # we are reading from webcam
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
+
+counts = 0
+
+occupied = False
 
 # initialize the first frame in the video stream
 firstFrame = None
@@ -23,7 +28,6 @@ while True:
 	# grab the current frame and initialize the occupied/unoccupied
 	# text
 	frame = vs.read()
-	frame = frame if args.get("video", None) is None else frame[1]
 	text = "No Motion Detected"
 
 	# if the frame could not be grabbed, then we have reached the end
@@ -56,29 +60,23 @@ while True:
 	# loop over the contours
 	for c in cnts:
 		# if the contour is too small, ignore it
-		if cv2.contourArea(c) < args["min_area"]:
+		if cv2.contourArea(c) < minarea:
 			continue
 		# update the text
-
-        
 		text = "Occupied"
-
-        # draw the text and timestamp on the frame
-	cv2.putText(frame, "Status: {}".format(text), (10, 20),
-		cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
-	cv2.putText(frame, datetime.datetime.now().strftime("%A %d %B %Y %I:%M:%S%p"),
-		(10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
-
+		if counts < 10:
+			frames.getFrames(frame, counts)
+			counts += 1
+		
 	# show the frame and record if the user presses a key
-	cv2.imshow("Security Feed", frame)
-	cv2.imshow("Thresh", thresh)
-	cv2.imshow("Frame Delta", frameDelta)
-	key = cv2.waitKey(1) & 0xFF
+	cv2.imshow("Motion", frame)
 
+	key = cv2.waitKey(1) & 0xFF
 	# if the `q` key is pressed, break from the lop
 	if key == ord("q"):
 		break
 
+	
 # cleanup the camera and close any open windows
 vs.stop()
 cv2.destroyAllWindows()

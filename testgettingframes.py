@@ -17,7 +17,6 @@ while True:
     if updateimages:
         for i in range(0,10):
             cv2.imwrite('id_images/'+str(i)+'.png', frame, params=None)
-            updateimages = False
 
     key = cv2.waitKey(1) & 0xFF
     if key == ord("q"):

@@ -10,7 +10,6 @@ for file in os.listdir(directory):
 	picture = file.decode('UTF-8')
 	picture = 'id_images/' + picture
 
-	print (picture)
 	image = cv2.imread(str(picture))
 	barcodes = pyzbar.decode(image)
 
