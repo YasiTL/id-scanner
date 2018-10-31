@@ -1,4 +1,3 @@
-# import the necessary packages
 from imutils.video import VideoStream
 import argparse
 import datetime
@@ -7,12 +6,9 @@ import time
 import cv2
 import frames
 
-# construct the argument parser and parse the arguments
-# ap = argparse.ArgumentParser()
-# ap.add_argument("-a", "--min-area", type=int, default=800, help="minimum area size")
-# args = vars(ap.parse_args())
+#Clean up my code so its not so tutorialy.
+
 minarea = 2000
-# we are reading from webcam
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
 
