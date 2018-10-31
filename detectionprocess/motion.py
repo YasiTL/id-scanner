@@ -11,7 +11,7 @@ import frames
 # ap = argparse.ArgumentParser()
 # ap.add_argument("-a", "--min-area", type=int, default=800, help="minimum area size")
 # args = vars(ap.parse_args())
-minarea = 1000
+minarea = 2000
 # we are reading from webcam
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
@@ -64,7 +64,7 @@ while True:
 			continue
 		# update the text
 		text = "Occupied"
-		if counts < 10:
+		if counts < 20:
 			frames.getFrames(frame, counts)
 			counts += 1
 		
