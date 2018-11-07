@@ -14,8 +14,8 @@ args = vars(ap.parse_args())
 # if the video path was not supplied, grab the reference to the
 # camera
 if not args.get("video", False):
-	vs = VideoStream(src=0).start()
-	time.sleep(2.0)
+    vs = VideoStream(usePiCamera=True).start()
+    time.sleep(2.0)
 
 # otherwise, load the video
 else:
