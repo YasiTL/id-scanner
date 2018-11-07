@@ -4,33 +4,29 @@ import argparse
 import cv2
 import os
 
-directory = os.fsencode('id_images')
+path = 'id_images'
+for file in os.listdir(path):
+	filename = os.fsdecode(file)
+	if filename.endswith(".png"): 
+		image_file = os.path.join(path, filename)
+		image = cv2.imread(image_file)
+		barcodes = pyzbar.decode(image)
 
-for file in os.listdir(directory):
-	picture = file.decode('UTF-8')
-	picture = 'id_images/' + picture
+for barcode in barcodes:
+	# extract the bounding box location of the barcode and draw the
+	# bounding box surrounding the barcode on the image
+	(x, y, w, h) = barcode.rect
+	cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
-	image = cv2.imread(str(picture))
-	barcodes = pyzbar.decode(image)
+	# the barcode data is a bytes object so if we want to draw it on
+	# our output image we need to convert it to a string first
+	barcodeData = barcode.data.decode("utf-8")
+	barcodeType = barcode.type
 
-# # load the input image
-# directory = os.fsencode('id_images')
+	# draw the barcode data and barcode type on the image
+	text = "{} ({})".format(barcodeData, barcodeType)
+	cv2.putText(image, text, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX,
+		0.5, (0, 0, 255), 2)
 
-# for file in os.listdir(directory):
-# 	picture = file.decode('UTF-8')
-# 	image = cv2.imread(picture)
-# 	barcodes = pyzbar.decode(image)
-	
-# 	for barcode in barcodes:
-# 		(x, y, w, h) = barcode.rect
-# 		cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
-# 		barcodeData = barcode.data.decode("utf-8")
-# 		barcodeType = barcode.type
-# 		text = "{} ({})".format(barcodeData, barcodeType)
-# 		cv2.putText(image, text, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
-# 		print("[INFO] Found {} barcode: {}".format(barcodeType, barcodeData))
-
-# # show the output image
-# cv2.namedWindow('image', cv2.WINDOW_AUTOSIZE)
-# cv2.imshow("Image Window", image)
-# cv2.waitKey(0)
+	# print the barcode type and data to the terminal
+	print("[INFO] Found {} barcode: {}".format(barcodeType, barcodeData))

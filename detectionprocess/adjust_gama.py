@@ -29,4 +29,4 @@ for file in os.listdir(path):
         img_name = "images/opencv_frame_{}.png".format(img_counter)
         cv2.imwrite(img_name, adjusted)
         print("{} written!".format(img_name))
-		img_counter += 1
+        img_counter += 1

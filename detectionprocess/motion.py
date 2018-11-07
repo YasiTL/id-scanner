@@ -8,7 +8,7 @@ import frames
 
 #Clean up my code so its not so tutorialy.
 
-minarea = 2000
+minarea = 5000
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
 
@@ -48,10 +48,12 @@ while True:
 
 	# dilate the thresholded image to fill in holes, then find contours
 	# on thresholded image
+	thresh = cv2.threshold(frameDelta, 100, 255,
+		cv2.THRESH_BINARY)[1]
 	thresh = cv2.dilate(thresh, None, iterations=2)
 	cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL,
 		cv2.CHAIN_APPROX_SIMPLE)
-	cnts = cnts[1]
+	cnts = cnts[0] if imutils.is_cv2() else cnts[1]
 
 	# loop over the contours
 	for c in cnts:
