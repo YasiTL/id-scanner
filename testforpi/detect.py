@@ -36,8 +36,8 @@ while True:
 		break
 
 	bounds = simple_detection.detectbarcode(frame)
-	print('CALLED RECT: ' + bounds[0])
-	print('CALLED BOX: ' + bounds[1])
+	print('CALLED RECT: ' + str(bounds[0]))
+	print('CALLED BOX: ' + str(bounds[1]))
 	# box = cv2.boxPoints(rect)
 	# box = np.int0(box)
 
