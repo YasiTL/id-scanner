@@ -4,6 +4,7 @@ from imutils.video import VideoStream
 import argparse
 import time
 import cv2
+import numpy as np
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -28,15 +29,14 @@ while True:
 	# respectively
 	frame = vs.read()
 	frame = frame[1] if args.get("video", False) else frame
- 
+
 	# check to see if we have reached the end of the
 	# video
 	if frame is None:
 		break
 
-	# detect the barcode in the image
-    rect = simple_detection.detect(frame)
-    box = cv2.boxPoints(rect)
+	rect = simple_detection.detect(frame)
+	box = cv2.boxPoints(rect)
 	box = np.int0(box)
 
 	# if a barcode was found, draw a bounding box on the frame
