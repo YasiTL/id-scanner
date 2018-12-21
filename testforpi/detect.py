@@ -19,8 +19,8 @@ if not args.get("video", False):
     time.sleep(2.0)
 
 # otherwise, load the video
-else:
-    vs = cv2.VideoCapture(args["video"])
+# else:
+#     vs = cv2.VideoCapture(args["video"])
 
 # keep looping over the frames
 while True:
