@@ -35,7 +35,9 @@ while True:
 		break
 
 	# detect the barcode in the image
-	box = simple_detection.detect(frame)
+    rect = simple_detection.detect(frame)
+    box = cv2.boxPoints(rect)
+	box = np.int0(box)
 
 	# if a barcode was found, draw a bounding box on the frame
 	if box is not None:
