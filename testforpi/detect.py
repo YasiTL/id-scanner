@@ -6,14 +6,21 @@ import time
 import cv2
 import RPi.GPIO as GPIO
 
+# construct the argument parse and parse the arguments
+ap = argparse.ArgumentParser()
+ap.add_argument("-v", "--video",
+                help="path to the (optional) video file")
+args = vars(ap.parse_args())
+
 # if the video path was not supplied, grab the reference to the
 # camera
-vs = VideoStream(usePiCamera=True).start()
-time.sleep(2.0)
+if not args.get("video", False):
+    vs = VideoStream(usePiCamera=True).start()
+    time.sleep(2.0)
 
 # otherwise, load the video
-# else:
-#     vs = cv2.VideoCapture(args["video"])
+else:
+    vs = cv2.VideoCapture(args["video"])
 
 # keep looping over the frames
 while True:
