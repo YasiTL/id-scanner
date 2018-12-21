@@ -5,6 +5,7 @@ import argparse
 import time
 import cv2
 import numpy as np
+from pyzbar import pyzbar
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -77,6 +78,7 @@ while True:
         # Final cropped & rotated rectangle
         croppedRotated = cv2.getRectSubPix(
             cropped, (int(croppedW), int(croppedH)), (size[0]/2, size[1]/2))
+        print(pyzbar.decode(croppedRotated))
         cv2.imshow("CroppedRotated", croppedRotated)
 
     # show the frame and record if the user presses a key
