@@ -43,9 +43,11 @@ while True:
 	else:
 		rect = rectandbox[0]
 		box = rectandbox[1]
-	
+
 	if rect is not None:
 		croppedimg = simple_detection.crop_minAreaRect(frame, rect)
+		cv2.imshow("Cropped", croppedimg)
+
 
 	# if a barcode was found, draw a bounding box on the frame
 	if box is not None:
@@ -53,7 +55,6 @@ while True:
 
 	# show the frame and record if the user presses a key
 	cv2.imshow("Frame", frame)
-	cv2.imshow("Cropped", croppedimg)
 	key = cv2.waitKey(1) & 0xFF
 
 	# if the 'q' key is pressed, stop the loop
