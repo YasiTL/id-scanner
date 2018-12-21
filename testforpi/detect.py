@@ -4,7 +4,7 @@ from imutils.video import VideoStream
 import argparse
 import time
 import cv2
-import RPI.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
