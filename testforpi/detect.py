@@ -6,8 +6,21 @@ import time
 import cv2
 import numpy as np
 
-vs = VideoStream(usePiCamera=True).start()
-time.sleep(2.0)
+# construct the argument parse and parse the arguments
+ap = argparse.ArgumentParser()
+ap.add_argument("-v", "--video",
+	help="path to the (optional) video file")
+args = vars(ap.parse_args())
+
+# if the video path was not supplied, grab the reference to the
+# camera
+if not args.get("video", False):
+    vs = VideoStream(usePiCamera=True).start()
+    time.sleep(2.0)
+
+# otherwise, load the video
+else:
+	vs = cv2.VideoCapture(args["video"])
 
 # keep looping over the frames
 while True:
@@ -15,7 +28,7 @@ while True:
 	# from either the 'VideoCapture' or 'VideoStream' object,
 	# respectively
 	frame = vs.read()
-	frame = frame
+	frame = frame[1] if args.get("video", False) else frame
 
 	# check to see if we have reached the end of the
 	# video
@@ -30,8 +43,8 @@ while True:
 	else:
 		rect = rectandbox[0]
 		box = rectandbox[1]
+	
 	croppedimg = simple_detection.crop_minAreaRect(frame, rect)
-
 
 	# if a barcode was found, draw a bounding box on the frame
 	if box is not None:
@@ -40,7 +53,6 @@ while True:
 	# show the frame and record if the user presses a key
 	cv2.imshow("Frame", frame)
 	cv2.imshow("Cropped", croppedimg)
-
 	key = cv2.waitKey(1) & 0xFF
 
 	# if the 'q' key is pressed, stop the loop
