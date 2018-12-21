@@ -62,9 +62,9 @@ def detect(image):
 	# bounding box of the largest contour
 	c = sorted(cnts, key=cv2.contourArea, reverse=True)[0]
 	rect = cv2.minAreaRect(c)
-	# box = cv2.boxPoints(rect)
-	# box = np.int0(box)
+	box = cv2.boxPoints(rect)
+	box = np.int0(box)
 
 	# return the bounding box of the barcode
-	# return box
-	return rect
+	return box
+	# return rect
