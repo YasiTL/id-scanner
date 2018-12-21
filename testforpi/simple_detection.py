@@ -14,7 +14,7 @@ def crop_minAreaRect(img, rect):
     # rotate bounding box
     rect0 = (rect[0], rect[1], 0.0) 
     box = cv2.boxPoints(rect0)
-    pts = np.int0(cv2.transform(np.array([box]), M))[0]    
+    pts = np.int(cv2.transform(np.array([box]), M))[0]
     pts[pts < 0] = 0
 
     # crop
@@ -29,7 +29,7 @@ def detect(image):
 
 	# compute the Scharr gradient magnitude representation of the images
 	# in both the x and y direction using OpenCV 2.4
-	ddepth = cv2.cv.CV_32F if imutils.is_cv2() else cv2.CV_32F
+	ddepth = cv2.CV_32F
 	gradX = cv2.Sobel(gray, ddepth=ddepth, dx=1, dy=0, ksize=-1)
 	gradY = cv2.Sobel(gray, ddepth=ddepth, dx=0, dy=1, ksize=-1)
 
