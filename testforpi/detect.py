@@ -15,7 +15,7 @@ while True:
 	# from either the 'VideoCapture' or 'VideoStream' object,
 	# respectively
 	frame = vs.read()
-	frame = frame[1] if args.get("video", False) else frame
+	frame = frame
 
 	# check to see if we have reached the end of the
 	# video
