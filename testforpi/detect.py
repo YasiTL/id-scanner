@@ -38,7 +38,8 @@ while True:
 	rectandbox = simple_detection.detectbarcode(frame)
 
 	if rectandbox == None:
-		continue
+		rect = None
+		box = None
 	else:
 		rect = rectandbox[0]
 		box = rectandbox[1]
