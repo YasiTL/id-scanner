@@ -23,7 +23,7 @@ import imutils
 
 #     return img_crop
 
-def detect(image):
+def detectbarcode(image):
 	# convert the image to grayscale
 	gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 

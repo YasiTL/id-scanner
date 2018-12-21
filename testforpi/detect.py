@@ -35,7 +35,7 @@ while True:
 	if frame is None:
 		break
 
-	box = simple_detection.detect(frame)
+	box = simple_detection.detectbarcode(frame)
 	# box = cv2.boxPoints(rect)
 	# box = np.int0(box)
 
