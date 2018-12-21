@@ -36,14 +36,12 @@ while True:
 		break
 
 	bounds = simple_detection.detectbarcode(frame)
-	print('CALLED RECT: ' + str(bounds[0]))
-	print('CALLED BOX: ' + str(bounds[1]))
-	# box = cv2.boxPoints(rect)
-	# box = np.int0(box)
+	rect = bounds[0]
+	box = bounds[1]
 
 	# if a barcode was found, draw a bounding box on the frame
-	# if box is not None:
-	# 	cv2.drawContours(frame, [box], -1, (0, 255, 0), 2)
+	if box is not None:
+		cv2.drawContours(frame, [box], -1, (0, 255, 0), 2)
 
 	# show the frame and record if the user presses a key
 	cv2.imshow("Frame", frame)

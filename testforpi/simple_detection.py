@@ -64,9 +64,6 @@ def detectbarcode(image):
 	rect = cv2.minAreaRect(c)
 	box = cv2.boxPoints(rect)
 	box = np.int0(box)
-	
-	print('FUNCTION RECT: ' + str(rect))
-	print('FUNCTOON BOX: ' + str(box))
 
 	# return the bounding box of the barcode
 	return rect, box
