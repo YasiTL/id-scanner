@@ -36,10 +36,8 @@ while True:
 		break
 
 	rectandbox = simple_detection.detectbarcode(frame)
-	if rectandbox[0] == None:
-		rect = 0
-	else:
-		rect = rectandbox[0]
+	
+	rect = rectandbox[0]
 	box = rectandbox[1]
 
 	# if a barcode was found, draw a bounding box on the frame
