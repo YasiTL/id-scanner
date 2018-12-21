@@ -36,7 +36,7 @@ while True:
 		break
 
 	bounds = simple_detection.detectbarcode(frame)
-	if bounds[0] is None:
+	if bounds[0] == None:
 		rect = 0
 	else:
 		rect = bounds[0]
