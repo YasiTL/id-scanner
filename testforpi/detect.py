@@ -68,7 +68,7 @@ while True:
     size = (x2-x1, y2-y1)
     M = cv2.getRotationMatrix2D((size[0]/2, size[1]/2), angle, 1.0)
     # Cropped upright rectangle
-    cropped = cv2.getRectSubPix(img, size, center)
+    cropped = cv2.getRectSubPix(frame, size, center)
     cropped = cv2.warpAffine(cropped, M, size)
     croppedW = H if H > W else W
     croppedH = H if H < W else W
