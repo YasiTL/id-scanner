@@ -29,7 +29,7 @@ def detect(image):
 
 	# compute the Scharr gradient magnitude representation of the images
 	# in both the x and y direction using OpenCV 2.4
-	ddepth = cv2.cv.CV_32F if imutils.is_cv2() else cv2.CV_32F
+	ddepth = cv2.CV_32F
 	gradX = cv2.Sobel(gray, ddepth=ddepth, dx=1, dy=0, ksize=-1)
 	gradY = cv2.Sobel(gray, ddepth=ddepth, dx=0, dy=1, ksize=-1)
 
