@@ -66,5 +66,5 @@ def detectbarcode(image):
 	box = np.int0(box)
 
 	# return the bounding box of the barcode
-	return box
+	return rect, box
 	# return rect
