@@ -39,7 +39,7 @@ while True:
     # detect the barcode in the image
     # box = simple_detection.detect(frame)
     rect = simple_detection.detect(frame)
-    croppedframe = simple_detection.crop_minAreaRect(frame, rect)
+    # croppedframe = simple_detection.crop_minAreaRect(frame, rect)
 
     box = cv2.boxPoints(rect)
     box = np.int0(box)
@@ -52,7 +52,7 @@ while True:
 
     # show the frame and record if the user presses a key
     cv2.imshow("Frame", frame)
-    cv2.imshow("crop", croppedframe)
+    # cv2.imshow("crop", croppedframe)
 
     key = cv2.waitKey(1) & 0xFF
 
