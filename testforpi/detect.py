@@ -39,9 +39,6 @@ while True:
 	rect = bounds[0]
 	box = bounds[1]
 
-	if rect is None:
-		pass
-
 	# if a barcode was found, draw a bounding box on the frame
 	if box is not None:
 		cv2.drawContours(frame, [box], -1, (0, 255, 0), 2)
