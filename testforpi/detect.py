@@ -78,8 +78,17 @@ while True:
         # Final cropped & rotated rectangle
         croppedRotated = cv2.getRectSubPix(
             cropped, (int(croppedW), int(croppedH)), (size[0]/2, size[1]/2))
-        print(pyzbar.decode(croppedRotated)[0])
         cv2.imshow("CroppedRotated", croppedRotated)
+
+        
+        barcodes = pyzbar.decode(croppedRotated)
+        for barcode in barcodes:
+            (x, y, w, h) = barcode.rect
+            cv2.rectangle(croppedRotated, (x, y), (x + w, y + h), (0, 0, 255), 2)
+            barcodeData = barcode.data.decode("utf-8")
+            barcodeType = barcode.type
+            text = "{} ({})".format(barcodeData, barcodeType)
+            print("[INFO] Found {} barcode: {} file: {}".format(barcodeType, barcodeData, 'livevideo'))
 
     # show the frame and record if the user presses a key
     cv2.imshow("Frame", frame)
