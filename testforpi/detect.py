@@ -78,7 +78,7 @@ while True:
         # Final cropped & rotated rectangle
         croppedRotated = cv2.getRectSubPix(
             cropped, (int(croppedW), int(croppedH)), (size[0]/2, size[1]/2))
-        print(pyzbar.decode(croppedRotated))
+        print(pyzbar.decode(croppedRotated)[0])
         cv2.imshow("CroppedRotated", croppedRotated)
 
     # show the frame and record if the user presses a key
@@ -94,8 +94,8 @@ if not args.get("video", False):
     vs.stop()
 
 # otherwise, release the camera pointer
-else:
-    vs.release()
+# else:
+#     vs.release()
 
 # close all windows
 cv2.destroyAllWindows()
